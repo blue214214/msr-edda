@@ -1,1 +1,29 @@
+# ── 远程原始忽略项 ──
 data/HIT/full/*.part
+
+# ── 训练产物 ──
+runs/
+*.pt
+*.pth
+*.log
+
+# ── Python ──
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.eggs/
+
+# ── 环境 ──
+.venv/
+venv/
+env/
+
+# ── IDE ──
+.idea/
+.vscode/
+*.swp
+
+# ── OS ──
+.DS_Store
+Thumbs.db

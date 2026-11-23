@@ -1,0 +1,9 @@
+# HIT Dataset (3 fault types, multiple conditions)
+data:
+  name: hit
+  root: data/HIT
+  num_classes: 3
+  class_names: [NA, IR, OR]
+  sample_rate: 32000
+  # 需根据实际 HIT 数据集定义
+  tasks: []

@@ -1,0 +1,48 @@
+# ============================================================
+# MSR-EDDA: Base configuration
+# 所有超参与指南 Appendix A 对齐
+# ============================================================
+
+data:
+  window: 2048
+  stride: 1024
+  norm: per_window          # per_window | source_stats
+  adapt_ratio: 0.7          # 前 70% adapt，后 30% test
+  sample_rate: 50000        # JNU=50kHz, HIT 需单独配置
+
+train:
+  epochs: 200
+  batch_size: 64
+  lr: 1.0e-3
+  lr_step3_scale: 0.1       # Step 3 学习率更低
+  momentum: 0.9
+  weight_decay: 1.0e-4
+  grad_clip: 1.0
+  seeds: [0, 1, 2, 3, 4]
+  deterministic: true
+
+# 三步训练的损失权重
+loss:
+  lam_mmd: 1.0              # MK-MMD
+  lam_cdan: 1.5             # 条件域对抗
+  lam_coral: 1.0            # CORAL
+  lam_adv: 3.0              # 证据分歧 (d_e ≤ 0.4，权重需放大)
+  lam_agree: 0.1            # Step 1 中的分歧一致项
+  lam_unc: 0.5              # Step 3 不确定性锚定
+  lam_bal: 0.1              # Step 3 类别多样性
+  unc_margin: 0.05          # 不确定性 hinge 边界
+  kl_max: 0.1               # EDL KL 正则最大值
+  kl_warmup_epochs: 30      # KL 升温 epoch
+
+# 模型参数
+model:
+  backbone: ms_rescnn
+  num_classes: 4            # JNU=4, HIT=3
+  feature_dim: 256
+  head_hidden: 128
+  dropout: 0.2
+
+# GRL 系数调度 (DANN 日程)
+grl:
+  lambda_max: 1.0
+  warmup_epochs: 10

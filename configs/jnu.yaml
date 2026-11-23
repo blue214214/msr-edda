@@ -1,0 +1,26 @@
+# JNU Dataset (4 fault types, 3 working conditions)
+data:
+  name: jnu
+  root: data/JNU
+  num_classes: 4
+  class_names: [NA, IR, OR, BF]
+  sample_rate: 50000
+  # 转速与工况映射
+  conditions:
+    0: 600
+    1: 800
+    2: 1000
+  # 6 个迁移任务 (三工况两两组合)
+  tasks:
+    - src: 0
+      tgt: 1
+    - src: 0
+      tgt: 2
+    - src: 1
+      tgt: 0
+    - src: 1
+      tgt: 2
+    - src: 2
+      tgt: 0
+    - src: 2
+      tgt: 1
